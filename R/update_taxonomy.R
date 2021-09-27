@@ -1,34 +1,30 @@
-
-
-
-
 #' Update the taxonomy table
 #'
 #' Update the taxontable with the taxa in TU. The taxontable must already be loaded.
 #'
 #' @param TU character vector
 #'
-#' @return data.table; updated taxontable
+#' @return data.table; updated taxontable.
 #' @export
 #'
 #' @examples
-#'
+
 update_taxonomy <- function(TU){
 
+        fill_new_table <- character(length(TU))
 
-
-
-        taxontable_new <- data.table(
+        taxontable_new <-
+                data.table::data.table(
                 original_name = TU,
-                species = character(length(TU)),
-                genus = character(length(TU)),
-                family = character(length(TU)),
-                order = character(length(TU)),
-                subclass = character(length(TU)),
-                class = character(length(TU)),
-                phylum = character(length(TU)),
-                kingdom = character(length(TU)),
-                clean = F
+                species  = fill_new_table,
+                genus    = fill_new_table,
+                family   = fill_new_table,
+                order    = fill_new_table,
+                subclass = fill_new_table,
+                phylum   = fill_new_table,
+                class    = fill_new_table,
+                kingdom  = fill_new_table,
+                clean    = FALSE
         )
 
         taxontable <- rbindlist(list(taxontable, taxontable_new))
@@ -39,7 +35,7 @@ update_taxonomy <- function(TU){
                 if (taxontable[original_name == TU[i], clean]) next()
 
                 i.co <-
-                        classification(TU[i], db = "gbif") |>
+                        taxize::classification(TU[i], db = "gbif") |>
                         {\(x) x[[1]]}()
 
                 # skip this iteration of the taxon is not found

@@ -7,7 +7,7 @@ Authors@R:
            role = c("aut", "cre"),
            email = "jonjup@protonmail.com",
            comment = c(ORCID = "https://orcid.org/0000-0002-6815-1855"))
-Description: A collection of miscellaneous functions I use
+Description: A collection of miscellaneous functions I use.
 License: MIT + file LICENSE
 Encoding: UTF-8
 LazyData: true
@@ -15,6 +15,10 @@ Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.1.2
 Imports: 
     data.table,
-    taxize
+    dplyr,
+    parallelDist,
+    sf,
+    taxize,
+    tidyr
 URL: https://github.com/JonJup/jjmisc
 BugReports: https://github.com/JonJup/jjmisc/issues
