@@ -37,6 +37,7 @@ ct_prepare_data1 <- function(data, taxon, abundance.to.pa = TRUE, typologies) {
         #- Make sure that each taxon only occurs once per sample. This might be violated
         #- when a coarse taxonomic resolution is used and several taxa from this group were
         #- observed.
+        setDT(x1)
         x1 <- x1[, abundance := sum(abundance), by = c("gr_sample_id", "taxon")]
         x1 <- unique(x1, by = c("gr_sample_id", "taxon"))
 
