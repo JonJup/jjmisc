@@ -40,7 +40,7 @@ ct_prepare_data1 <- function(data, taxon, typologies) {
         setDT(x1)
         # x1 <- x1[, abundance := sum(abundance), by = c("gr_sample_id", "taxon")]
         x1 <- unique(x1, by = c("gr_sample_id", "taxon"))
-        x1 <- x1[, abundance := 1]
+        x1 <- x1$abundance = 1
 
         #- Drop rows where the taxonomic level is coarser then what is required by the
         #- taxon argument.
