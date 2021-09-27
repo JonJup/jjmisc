@@ -40,7 +40,7 @@ ct_prepare_data1 <- function(data, taxon, abundance.to.pa = TRUE, typologies) {
         x1 <- x1[, abundance := sum(abundance), by = c("gr_sample_id", "taxon")]
         x1 <- unique(x1, by = c("gr_sample_id", "taxon"))
 
-
+        setDT(x1)
         if (abundance.to.pa){
                 #- Set all abundance to 1.
                 x1 <- x1[, abundance2 := 1]
