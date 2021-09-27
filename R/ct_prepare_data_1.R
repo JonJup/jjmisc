@@ -9,7 +9,7 @@
 #'
 #' @examples
 #'
-ct_prepare_data1 <- function(data, taxon, abundance.to.pa = TRUE, typologies) {
+ct_prepare_data1 <- function(data, taxon, typologies) {
 
         #- Check inputs
         if (!"data.table" %in% class(data)) stop("data must be a data.table")
@@ -38,14 +38,10 @@ ct_prepare_data1 <- function(data, taxon, abundance.to.pa = TRUE, typologies) {
         #- when a coarse taxonomic resolution is used and several taxa from this group were
         #- observed.
         setDT(x1)
-        x1 <- x1[, abundance := sum(abundance), by = c("gr_sample_id", "taxon")]
+        # x1 <- x1[, abundance := sum(abundance), by = c("gr_sample_id", "taxon")]
         x1 <- unique(x1, by = c("gr_sample_id", "taxon"))
+        x1 <- x1[, abundance := 1]
 
-        setDT(x1)
-        if (abundance.to.pa){
-                #- Set all abundance to 1.
-                x1 <- x1[, abundance2 := 1]
-        }
         x1 <- unique(x1, by = c("gr_sample_id", taxon))
         #- Drop rows where the taxonomic level is coarser then what is required by the
         #- taxon argument.
@@ -53,7 +49,7 @@ ct_prepare_data1 <- function(data, taxon, abundance.to.pa = TRUE, typologies) {
         #- Turn to wide format with one column for each taxon and one row per site.
         x1 <- pivot_wider(x1, id_cols = append(c("gr_sample_id"), typologies),
                      names_from = all_of(taxon),
-                     values_from = abundance2,
+                     values_from = abundance,
                      values_fill = 0)
         #- Turn to data.table.
         x1 <- setDT(x1)
