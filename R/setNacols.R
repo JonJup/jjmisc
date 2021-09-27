@@ -8,7 +8,7 @@
 #' @examples
 setNAcols <- function(x){
         #- How many columns are in x that are not in append("gr_sample_id", typologies)
-        x1 <- length(setdiff(names(x), append("gr_sample_id", typologies)))
+        x1 <- length(setdiff(names(x), append("gr_sample_id", "brt12")))
         #- How many columns are in x
         x2 <- ncol(x)
         #- Columns in append("gr_sample_id", typologies) + 1

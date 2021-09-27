@@ -9,21 +9,20 @@
 #'
 #' @examples
 #'
-ct_prepare_data1 <- function(data, taxon, typologies) {
+ct_prepare_data1 <- function(dataset, taxon) {
 
-        data <- data.frame(data)
+        dataset <- data.frame(dataset)
 
         #- Check inputs
-        if (!"data.frame" %in% class(data)) stop("data must be a data.table")
+        if (!"data.frame" %in% class(dataset)) stop("data must be a data.table")
         if (!"character" %in% class(taxon)) stop("taxon must be a character")
-        if (!"character" %in% class(typologies)) stop("typologies must be a character vector")
 
         #- Character vector with column names to keep
-        #col.vec <- append(c("gr_sample_id", taxon, "abundance"), typologies)
-        col.vec <- c("gr_sample_id", taxon, "abundance", typologies)
+        #col.vec <- append(c("gr_sample_id", taxon, "abundance"))
+        col.vec <- c("gr_sample_id", taxon, "abundance", "brt12")
         #- Subset data to columns from col.vec
         #x1 <- data[, .SD, .SDcols = col.vec]
-        x1 <- data[, col.vec]
+        x1 <- dataset[, col.vec]
         #- remove any NA in taxon column
         names(x1)[which(names(x1) %in% c("species", "genus", "family"))] <- "taxon"
         x1 <- x1[which(!is.na(x1$taxon)), ]
@@ -36,7 +35,7 @@ ct_prepare_data1 <- function(data, taxon, typologies) {
         x1 <-
                 tidyr::pivot_wider(
                         x1,
-                        id_cols = append(c("gr_sample_id"), typologies),
+                        id_cols = c("gr_sample_id", "brt12"),
                         names_from = taxon,
                         values_from = abundance,
                         values_fill = 0
