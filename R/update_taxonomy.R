@@ -1,8 +1,22 @@
-# Purpose: update the taxonomy table which connect original names to various taxonomic levels
-# date created: 22-09-21
-# date last modified: 22-09-21
 
+
+
+
+#' Update the taxonomy table
+#'
+#' Update the taxontable with the taxa in TU. The taxontable must already be loaded.
+#'
+#' @param TU character vector
+#'
+#' @return data.table; updated taxontable
+#' @export
+#'
+#' @examples
+#'
 update_taxonomy <- function(TU){
+
+
+
 
         taxontable_new <- data.table(
                 original_name = TU,
