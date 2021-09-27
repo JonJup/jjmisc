@@ -25,9 +25,11 @@ ct_prepare_data1 <- function(data, taxon, abundance.to.pa = TRUE, typologies) {
         #- observed.
         if ("species" %in% names(x1)) {
                 x1 <- x1[, abundance := sum(abundance),by = c("gr_sample_id", "species")]
-        } else if ("genus"   %in% names(x1)) {
+        }
+        if ("genus"   %in% names(x1)) {
                 x1 <- x1[, abundance := sum(abundance),by = c("gr_sample_id", "genus")]
-        } else if ("family"  %in% names(x1)){
+        }
+        if ("family"  %in% names(x1)){
                 x1 <- x1[, abundance := sum(abundance), by = c("gr_sample_id", "family")]
         }
 
