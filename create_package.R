@@ -16,9 +16,6 @@ load_all()
 check()
 use_mit_license("Jonathan Jupke")
 document()
-
-use_git(message=)
-
 use_package("data.table")
 use_package("taxize")
 use_package("sf")

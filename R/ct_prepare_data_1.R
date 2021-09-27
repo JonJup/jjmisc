@@ -42,19 +42,18 @@ ct_prepare_data1 <- function(data, taxon, typologies) {
         x1 <- unique(x1, by = c("gr_sample_id", "taxon"))
         x1 <- x1[, abundance := 1]
 
-        x1 <- unique(x1, by = c("gr_sample_id", taxon))
         #- Drop rows where the taxonomic level is coarser then what is required by the
         #- taxon argument.
-        x1 <- x1[!is.na(get(taxon))]
+        x1 <- x1[!is.na(taxon)]
         #- Turn to wide format with one column for each taxon and one row per site.
-        x1 <- pivot_wider(x1, id_cols = append(c("gr_sample_id"), typologies),
-                     names_from = all_of(taxon),
+        x1 <- tidyr::pivot_wider(x1, id_cols = append(c("gr_sample_id"), typologies),
+                     names_from = taxon,
                      values_from = abundance,
                      values_fill = 0)
         #- Turn to data.table.
         x1 <- setDT(x1)
         #- Turn NAs to 0 i.e. absence.
-        x2 <- setNAcols(x1)
+        x2 <- jjmisc::setNAcols(x1)
         x1 <- setnafill(x = x1, type = "const", cols = x2, fill = 0)
         #- remove columns of taxa that are always absent.
         rm.col <- names(which(colSums(x1[,x2,with=F]) == 0))

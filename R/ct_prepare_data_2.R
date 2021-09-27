@@ -10,7 +10,9 @@
 #' @examples
 ct_prepare_data2 <- function(data, ncores = 1, distance_metric = "binary"){
 
-        x1  <- as.matrix(select(data, !append("gr_sample_id", typologies)))
+        id <- which(!names(data) %in% append("gr_sample_id", typologies))
+        x1  <- data[,id,with = F]
+        x1  <- as.matrix(x1)
         x2  <- parallelDist(x1, method = distance_metric, threads = ncores)
         return(x2)
 

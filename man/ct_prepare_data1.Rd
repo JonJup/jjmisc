@@ -4,7 +4,7 @@
 \alias{ct_prepare_data1}
 \title{Prepare data for comparison of typologies}
 \usage{
-ct_prepare_data1(data, taxon, abundance.to.pa = TRUE, typologies)
+ct_prepare_data1(data, taxon, typologies)
 }
 \arguments{
 \item{data}{data.table}
