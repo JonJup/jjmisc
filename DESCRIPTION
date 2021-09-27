@@ -16,3 +16,5 @@ RoxygenNote: 7.1.2
 Imports: 
     data.table,
     taxize
+URL: https://github.com/JonJup/jjmisc
+BugReports: https://github.com/JonJup/jjmisc/issues
