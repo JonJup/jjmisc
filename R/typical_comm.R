@@ -15,7 +15,7 @@ typical_comm <- function(community, grouping, perm,typology, season, threshold =
 
         perms <- lapply(1:perm, function(x) grouping[permute::shuffle(n = length(grouping))])
         org_score   <- compute_typical_comm(community = community, grouping = grouping, threshold = threshold, out = "similarity")
-        perm_scores <- sapply(1:perm, function(x) compute_typical_comm(community, perms[[x]], threshold))
+        perm_scores <- sapply(1:perm, function(x) compute_typical_comm(community, perms[[x]], threshold = threshold,out = "similarity"))
         p_values <- sum(perm_scores<org_score, na.rm = TRUE)/(perm+1)
 
         out <- data.table::data.table(typology=typology,
