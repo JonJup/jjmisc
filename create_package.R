@@ -11,6 +11,8 @@ use_r("add_typology.R")
 use_r("ct_prepare_data_2.R")
 use_r("fill_taxon_table.R")
 use_r("setNAcols.R")
+use_r("compute_indvalstat.R")
+use_r("indvalstat.R")
 
 load_all()
 check()

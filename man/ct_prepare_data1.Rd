@@ -4,12 +4,12 @@
 \alias{ct_prepare_data1}
 \title{Prepare data for comparison of typologies}
 \usage{
-ct_prepare_data1(data, taxon, typologies)
+ct_prepare_data1(dataset, taxon)
 }
 \arguments{
-\item{data}{data.table}
-
 \item{taxon}{character}
+
+\item{data}{data.table}
 
 \item{abundance.to.pa}{boolean}
 }
