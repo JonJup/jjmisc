@@ -15,6 +15,8 @@ use_r("compute_indvalstat.R")
 use_r("indvalstat.R")
 use_r("compute_typical_comm.R")
 use_r("typical_comm.R")
+use_r("compute_cs.R")
+use_r("classification_strength.R")
 
 load_all()
 check()
