@@ -15,8 +15,7 @@ compute_indvalstat <- function(community, grouping){
         x1 <- indicspecies::multipatt(x = community, cluster = grouping, duleg = TRUE, permutations = 999)
         x1 <- x1$sign
         x1$taxon <- rownames(x1)
-        setDT(x1)
-        x1 <- x1[p.value <= 0.05]
+        x1 <- x1[which(x1$p.value <= 0.05), ]
         n_indi <- nrow(x1)
         mean_stat <- mean(x1$stat)
         out <- data.table::data.table(n_indi, mean_stat)
