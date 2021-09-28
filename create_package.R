@@ -13,6 +13,8 @@ use_r("fill_taxon_table.R")
 use_r("setNAcols.R")
 use_r("compute_indvalstat.R")
 use_r("indvalstat.R")
+use_r("compute_typical_comm.R")
+use_r("typical_comm.R")
 
 load_all()
 check()

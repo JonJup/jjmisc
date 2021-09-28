@@ -2,9 +2,11 @@
 
 export(add_typologies)
 export(compute_indvalstat)
+export(compute_typical_comm)
 export(ct_prepare_data1)
 export(ct_prepare_data2)
 export(fill_taxon_table)
 export(indvalstat)
 export(setNAcols)
+export(typical_comm)
 export(update_taxonomy)
