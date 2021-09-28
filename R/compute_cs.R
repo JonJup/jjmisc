@@ -1,7 +1,15 @@
+#' Compute classification strength
+#'
+#' @param dist distance matrix
+#' @param grouping character vector with group membership of sites
+#' @param season character, for which season is the test run?
+#' @param typology character, for this typology is this test run?
+#'
+#' @return data.table
+#' @export
+#'
+#' @examples
 compute_cs <- function(dist, grouping, season, typology){
-
-
-
 
                  #- unique types
                 grouping.u <- unique(grouping)

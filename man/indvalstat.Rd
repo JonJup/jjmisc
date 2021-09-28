@@ -15,7 +15,7 @@ indvalstat(community, grouping, perm, typology, season)
 
 \item{typology}{character, for this typology is this test run?}
 
-\item{season}{charachter, for which season is the test run?}
+\item{season}{character, for which season is the test run?}
 }
 \value{
 data.table with typology, season, variable (number of indicator taxa or mean indicator value of significant indicator taxa), test statistic values and permutation p_vaules.

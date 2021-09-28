@@ -7,7 +7,7 @@
 #' @param grouping character vector with group membership of sites
 #' @param perm number of permutations to compute p-value of number of indicators and mean indicator statistic. NOT permutations in the call to multipatt.
 #' @param typology character, for this typology is this test run?
-#' @param season charachter, for which season is the test run?
+#' @param season character, for which season is the test run?
 #'
 #' @return data.table with typology, season, variable (number of indicator taxa or mean indicator value of significant indicator taxa), test statistic values and permutation p_vaules.
 #' @export
