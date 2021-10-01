@@ -9,18 +9,25 @@
 #'
 add_typologies <- function(data, debug = F){
 
-        add_typologies <- function(data){
-                if(debug) print("start")
+                if(debug)
+                        print("start")
                 sites <-
                         unique(data, by = "site_id") |>
                         sf::st_as_sf(coords = c("x.coord", "y.coord"), crs = data4$EPSG[1]) |>
                         dplyr::select(site_id) |>
                         sf::st_transform(crs = sf::st_crs(typologies))
-                if(debug) print("sites")
+
+                if(debug)
+                        print("sites")
+
                 nn <- sf::st_nearest_feature(sites, typologies)
                 nn <- typologies[nn,]
-                if(debug) print("nn")
-                distances <- sf::st_distance(sites, y = nn, by_element = TRUE)
+
+                if(debug)
+                        print("nn")
+                distances <- sf::st_distance(sites,
+                                             y = nn,
+                                             by_element = TRUE)
 
                 sites <- dplyr::mutate(sites,
                                        distance = as.numeric(distances),
@@ -39,5 +46,4 @@ add_typologies <- function(data, debug = F){
                                              by = "site_id")
                 data.table::setDT(data.out)
                 return(data.out)
-        }
 }
