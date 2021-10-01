@@ -16,8 +16,11 @@ RoxygenNote: 7.1.2
 Imports: 
     data.table,
     dplyr,
+    fs,
+    lubridate,
     parallelDist,
     sf,
+    stringr,
     taxize,
     tidyr
 URL: https://github.com/JonJup/jjmisc

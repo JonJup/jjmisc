@@ -17,6 +17,8 @@ use_r("compute_typical_comm.R")
 use_r("typical_comm.R")
 use_r("compute_cs.R")
 use_r("classification_strength.R")
+use_r("get_most_recent_date.R")
+use_r("temporal_aggregation.R")
 
 load_all()
 check()
@@ -28,6 +30,9 @@ use_package("sf")
 use_package("dplyr")
 use_package("tidyr")
 use_package("parallelDist")
+use_package("fs")
+use_package("lubridate")
+use_package("stringr")
 
 
 #- create a github token. This function loads the github website which provides you with a token.
