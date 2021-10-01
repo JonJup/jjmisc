@@ -32,7 +32,7 @@ add_typologies <- function(data, debug = F){
                 sites <- dplyr::mutate(sites,
                                        distance = as.numeric(distances),
                                        brt12    = nn$brt12,
-                                       ife      = nn$ife,
+                                       ife      = nn$illies,
                                        bgr      = nn$bgr,
                                        brtXife  = nn$brtXife,
                                        brtXbgr  = nn$brtXbgr,
