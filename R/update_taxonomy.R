@@ -21,13 +21,13 @@ update_taxonomy <- function(TU){
                 family   = fill_new_table,
                 order    = fill_new_table,
                 subclass = fill_new_table,
-                phylum   = fill_new_table,
                 class    = fill_new_table,
+                phylum   = fill_new_table,
                 kingdom  = fill_new_table,
                 clean    = FALSE
         )
 
-        taxontable <- rbindlist(list(taxontable, taxontable_new))
+        taxontable <- data.table::rbindlist(list(taxontable, taxontable_new))
 
         for (i in seq_along(TU)){
 
