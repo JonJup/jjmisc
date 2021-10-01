@@ -14,7 +14,7 @@ most_recent_date <- function(folder, file) {
         fs::dir_ls(folder, regexp = file) |>
         stringr::str_remove(folder) |>
         dplyr::tibble() |>
-        dplyr::rename(date = "str_remove(...)") |>
+        dplyr::rename(date = everything()) |>
         dplyr::mutate(date = lubridate::ymd(date)) |>
         dplyr::slice_max(date) |>
         dplyr::pull(date)
