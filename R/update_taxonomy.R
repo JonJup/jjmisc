@@ -11,6 +11,7 @@
 
 update_taxonomy <- function(TU){
 
+        library(data.table)
         fill_new_table <- character(length(TU))
 
         taxontable_new <-
