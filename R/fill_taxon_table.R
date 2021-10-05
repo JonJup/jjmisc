@@ -24,6 +24,8 @@ fill_taxon_table <- function(o, s = NULL,g = NULL, f = NULL, or = NULL, sc = NUL
         if(!is.null(sc)) taxontable$subclass[o.id] <- sc
         if(!is.null(c))  taxontable$class[o.id]    <- c
         if(!is.null(p))  taxontable$phylum[o.id]   <- p
-        taxontable$kigdom[o.id]  <- "Animalia"
-
+        taxontable$kingdom[o.id]  <- "Animalia"
+        print(taxontable[o.id,])
+        x <- readline("ok?")
+        if (x != "no") return(taxontable)
 }
