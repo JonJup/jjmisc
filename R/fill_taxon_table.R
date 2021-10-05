@@ -13,14 +13,14 @@
 #' @export
 #'
 #' @examples
-fill_taxon_table <- function(o, s = NULL,g = NULL, f = NULL, o = NULL, sc = NULL, c = NULL, p = NULL){
+fill_taxon_table <- function(o, s = NULL,g = NULL, f = NULL, or = NULL, sc = NULL, c = NULL, p = NULL){
 
         o.id <- which(taxontable$original_name == o)
 
         if(!is.null(s))  taxontable$species[o.id]  <- s
         if(!is.null(g))  taxontable$genus[o.id]    <- g
         if(!is.null(f))  taxontable$family[o.id]   <- f
-        if(!is.null(o))  taxontable$order[o.id]    <- o
+        if(!is.null(or))  taxontable$order[o.id]    <- or
         if(!is.null(sc)) taxontable$subclass[o.id] <- sc
         if(!is.null(c))  taxontable$class[o.id]    <- c
         if(!is.null(p))  taxontable$phylum[o.id]   <- p
