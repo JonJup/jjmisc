@@ -4,18 +4,17 @@
 #'
 #' @param TU character vector
 #'
-#' @return data.table; updated taxontable.
+#' @return data.frame; updated taxontable.
 #' @export
 #'
 #' @examples
 
 update_taxonomy <- function(TU){
 
-        library(data.table)
         fill_new_table <- character(length(TU))
 
         taxontable_new <-
-                data.table::data.table(
+                data.frame(
                 original_name = TU,
                 species  = fill_new_table,
                 genus    = fill_new_table,
@@ -28,30 +27,36 @@ update_taxonomy <- function(TU){
                 clean    = FALSE
         )
 
-        taxontable <- data.table::rbindlist(list(taxontable, taxontable_new))
-
+        #- combine old and new taxontables
+        taxontable2 <- rbind( taxontable, taxontable_new)
+        #- loop over new taxa and try to find them in gbif
         for (i in seq_along(TU)){
 
+                i.id <- which(taxontable$original_name == TU[i])
                 #- skip this iteration of the loop if the focal taxon has already been evaluated.
-                if (taxontable[original_name == TU[i], clean]) next()
-
+                if (taxontable$clean[i.id])
+                        next()
+                #- look for taxon on gbif and extract first element of output
                 i.co <-
                         taxize::classification(TU[i], db = "gbif") |>
                         {\(x) x[[1]]}()
 
-                # skip this iteration of the taxon is not found
-                if (is.na(i.co)) next()
+                #- skip this iteration of the taxon is not found
+                if (is.na(i.co))
+                        next()
                 #- assign taxon levels
-                taxontable[original_name == TU[i], species  := ifelse("species"  %in% i.co$rank, i.co$name[which(i.co$rank == "species")], NA)]
-                taxontable[original_name == TU[i], genus    := ifelse("genus"    %in% i.co$rank, i.co$name[which(i.co$rank == "genus")], NA)]
-                taxontable[original_name == TU[i], family   := ifelse("family"   %in% i.co$rank, i.co$name[which(i.co$rank == "family")], NA)]
-                taxontable[original_name == TU[i], order    := ifelse("order"    %in% i.co$rank, i.co$name[which(i.co$rank == "order")], NA)]
-                taxontable[original_name == TU[i], subclass := ifelse("subclass" %in% i.co$rank, i.co$name[which(i.co$rank == "subclass")], NA)]
-                taxontable[original_name == TU[i], class    := ifelse("class"    %in% i.co$rank, i.co$name[which(i.co$rank == "class")], NA)]
-                taxontable[original_name == TU[i], phylum   := ifelse("phylum"   %in% i.co$rank, i.co$name[which(i.co$rank == "phylum")], NA)]
-                taxontable[original_name == TU[i], kingdom  := ifelse("kingdom"  %in% i.co$rank, i.co$name[which(i.co$rank == "kingdom")], NA)]
-                taxontable[original_name == TU[i], clean := TRUE]
+                taxontable$species[i.id] <- ifelse("species"  %in% i.co$rank, i.co$name[which(i.co$rank == "species")], NA)
+                taxontable$genus[i.id] <-      ifelse("genus"    %in% i.co$rank, i.co$name[which(i.co$rank == "genus")], NA)
+                taxontable$family[i.id] <-     ifelse("family"   %in% i.co$rank, i.co$name[which(i.co$rank == "family")], NA)
+                taxontable$order[i.id] <-      ifelse("order"    %in% i.co$rank, i.co$name[which(i.co$rank == "order")], NA)
+                taxontable$subclass[i.id] <-   ifelse("subclass" %in% i.co$rank, i.co$name[which(i.co$rank == "subclass")], NA)
+                taxontable$class[i.id] <-      ifelse("class"    %in% i.co$rank, i.co$name[which(i.co$rank == "class")], NA)
+                taxontable$phylum[i.id] <-     ifelse("phylum"   %in% i.co$rank, i.co$name[which(i.co$rank == "phylum")], NA)
+                taxontable$kingdom[i.id] <-    ifelse("kingdom"  %in% i.co$rank, i.co$name[which(i.co$rank == "kingdom")], NA)
+                taxontable$clean[i.id] <- TRUE
                 rm(i.co)
+                rm(i.id)
+                gc()
 
         }
         return(taxontable)
