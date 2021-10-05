@@ -4,24 +4,31 @@
 \alias{fill_taxon_table}
 \title{Fill taxon table}
 \usage{
-fill_taxon_table(o, a, b, c, d, e, f, g)
+fill_taxon_table(
+  o,
+  s = NULL,
+  g = NULL,
+  f = NULL,
+  or = NULL,
+  sc = NULL,
+  c = NULL,
+  p = NULL
+)
 }
 \arguments{
-\item{o}{character. Original Name.}
+\item{o}{character. New order name.}
 
-\item{a}{character. New species name.}
+\item{s}{character. New species name.}
 
-\item{b}{character. New genus name.}
+\item{g}{character. New genus name.}
 
-\item{c}{character. New family name.}
+\item{f}{character. New family name.}
 
-\item{d}{character. New order name.}
+\item{sc}{character. New subclass name.}
 
-\item{e}{character. New subclass name.}
+\item{c}{character. New class name.}
 
-\item{f}{character. New class name.}
-
-\item{g}{character. New phylum name.}
+\item{p}{character. New phylum name.}
 }
 \value{
 data.table

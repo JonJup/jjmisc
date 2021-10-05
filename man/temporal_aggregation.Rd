@@ -19,7 +19,7 @@ temporal_aggregation(data, sites, id_append, debug = FALSE)
 data.table
 }
 \description{
-Aggregate samples from the same sampling site and season
+Debug mode currently requires tmap package to be loaded which is technically no dependency, i.e. not automatically loaded.
 }
 \examples{
 

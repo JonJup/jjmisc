@@ -10,7 +10,7 @@ update_taxonomy(TU)
 \item{TU}{character vector}
 }
 \value{
-data.table; updated taxontable.
+data.frame; updated taxontable.
 }
 \description{
 Update the taxontable with the taxa in TU. The taxontable must already be loaded.
