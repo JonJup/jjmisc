@@ -1,29 +1,29 @@
 #' Fill taxon table
 #'
 #' @param o character. Original Name.
-#' @param a character. New species name.
-#' @param b character. New genus name.
-#' @param c character. New family name.
-#' @param d character. New order name.
-#' @param e character. New subclass name.
-#' @param f character. New class name.
-#' @param g character. New phylum name.
+#' @param s character. New species name.
+#' @param g character. New genus name.
+#' @param f character. New family name.
+#' @param o character. New order name.
+#' @param sc character. New subclass name.
+#' @param c character. New class name.
+#' @param p character. New phylum name.
 #'
 #' @return data.table
 #' @export
 #'
 #' @examples
-fill_taxon_table <- function(o,a,b,c,d,e,f,g){
+fill_taxon_table <- function(o, s = NULL,g = NULL, f = NULL, o = NULL, sc = NULL, c = NULL, p = NULL){
 
-        taxontable[original_name == o,
-                   `:=` (
-                           species = a,
-                           genus = b,
-                           family = c,
-                           order = d,
-                           subclass = e,
-                           class = f,
-                           phylum = g,
-                           kingdom = "Animalia"
-                   )]
+        o.id <- which(taxontable$original_name == o)
+
+        if(!is.null(s))  taxontable$species[o.id]  <- s
+        if(!is.null(g))  taxontable$genus[o.id]    <- g
+        if(!is.null(f))  taxontable$family[o.id]   <- f
+        if(!is.null(o))  taxontable$order[o.id]    <- o
+        if(!is.null(sc)) taxontable$subclass[o.id] <- sc
+        if(!is.null(c))  taxontable$class[o.id]    <- c
+        if(!is.null(p))  taxontable$phylum[o.id]   <- p
+        taxontable$kigdom[o.id]  <- "Animalia"
+
 }
