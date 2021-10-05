@@ -10,7 +10,7 @@
 add_typologies <- function(data){
 
         sites <-
-                unique(data, by = "site_id") |>
+                dplyr::distinct_at(data, site_id) |>
                 sf::st_as_sf(coords = c("x.coord", "y.coord"), crs = data4$EPSG[1]) |>
                 dplyr::select(site_id) |>
                 sf::st_transform(crs = sf::st_crs(typologies))
@@ -35,6 +35,6 @@ add_typologies <- function(data){
         data.out <- dplyr::left_join(data,
                                      sites,
                                      by = "site_id")
-        data.table::setDT(data.out)
+
         return(data.out)
 }
