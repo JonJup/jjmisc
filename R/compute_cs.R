@@ -19,7 +19,7 @@ compute_cs <- function(dist, grouping, season, typology){
                 # ———> for every type: how similar are observations within type compared to between types
                 for (k in seq_along(grouping.u)) {
 
-                        if (k == 1) j.csk <- c()
+                        if (k == 1) wts <- bts <- c()
                         k.id1    <- which(grouping == grouping.u[k])
                         k.id.n1  <- which(grouping != grouping.u[k])
                         k.sim1   <- dist2[k.id1, k.id1]
@@ -28,16 +28,17 @@ compute_cs <- function(dist, grouping, season, typology){
                         k.lt     <- k.sim1[lower.tri(k.sim1)]
                         k.ut.n   <- k.sim.n1[upper.tri(k.sim.n1)]
                         k.lt.n   <- k.sim.n1[lower.tri(k.sim.n1)]
-                        j.csk[k] <- mean(append(k.ut, k.lt), na.rm = T) - mean(append(k.ut.n, k.lt.n), na.rm = T)
+                        wts[k] <-  mean(append(k.ut, k.lt), na.rm = T)
+                        bts[k] <-  mean(append(k.ut.n, k.lt.n), na.rm = T)
+
                         rm(list = ls()[grepl(x = ls(), pattern = "^k\\.")])
                         rm(k)
 
                 }
-                i.csj <- mean(j.csk, na.rm = T)
-
-                # ———— reshape and store results  ———— #
-                i.cs.eval <- data.table(cs = i.csj,
-                                        typology = typology,
-                                        season = season)
-               return(i.cs.eval)
+                csj <- data.frame(within_type = wts,
+                                  between_type = bts,
+                                  type = grouping.u,
+                                  typlogy = typology,
+                                  season = season)
+               return(csj)
 }
