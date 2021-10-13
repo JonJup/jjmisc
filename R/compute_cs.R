@@ -1,9 +1,9 @@
 #' Compute classification strength
 #'
-#' @param dist distance matrix
+#' @param dist A distance matrix
 #' @param grouping character vector with group membership of sites
-#' @param season character, for which season is the test run?
-#' @param typology character, for this typology is this test run?
+#' @param season character, for which season is the run? The value is supplied as value for the output table.
+#' @param typology character, for this typology is this test run? The value is supplied as value for the output table.
 #'
 #' @return data.table
 #' @export
@@ -16,7 +16,7 @@ compute_cs <- function(dist, grouping, season, typology){
                 #- transform to matrix
                 dist2 <- as.matrix(dist)
                 dist2 <- 1 - dist2
-                # ———> for every type: how similar are observations within type compared to between types
+                # ———> for every type: how similar are observations within types and between types
                 for (k in seq_along(grouping.u)) {
 
                         if (k == 1) wts <- bts <- c()
@@ -35,10 +35,31 @@ compute_cs <- function(dist, grouping, season, typology){
                         rm(k)
 
                 }
-                csj <- data.frame(within_type = wts,
-                                  between_type = bts,
-                                  type = grouping.u,
-                                  typlogy = typology,
-                                  season = season)
+                #- Relative frequencies of types
+                props <- grouping |>
+                        table() |>
+                        proportions() |>
+                        round(2)
+                props <- data.frame(type = names(props),
+                                    proportion = c(props))
+                #- collect loop results in table
+                csj <- data.frame(
+                        within_type = wts,
+                        between_type = bts,
+                        type = grouping.u,
+                        typlogy = typology,
+                        season = season
+                )
+                #- combine loop results with relative frequencies
+                csj <- dplyr::left_join(x = csj,
+                                        y = props,
+                                        by = "type")
+                csj <-
+                        csj |>
+                        dplyr::mutate(within_weighted = within_type * proportion,
+                                      between_type_mean = mean(csj$between_type)) |>
+                        dplyr::mutate(within_weighted_sum = sum(within_weighted)) |>
+                        dplyr::mutate(classification_strength = within_weighted_sum - between_type_mean)
+
                return(csj)
 }
