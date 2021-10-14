@@ -11,14 +11,15 @@
 #' @export
 #'
 #' @examples
-typical_comm <- function(community, grouping, perm,typology, season, threshold = 0.66){
+typical_comm <- function(community, grouping, perm,typology, season, threshold = 0.50){
 
         perms <- lapply(1:perm, function(x) grouping[permute::shuffle(n = length(grouping))])
         org_score   <- compute_typical_comm(community = community, grouping = grouping, threshold = threshold, out = "similarity")
-        perm_scores <- sapply(1:perm, function(x) compute_typical_comm(community, perms[[x]], threshold = threshold,out = "similarity"))
-        p_values <- sum(perm_scores<org_score, na.rm = TRUE)/(perm+1)
+        perm_scores <- lapply(1:perm, function(x) compute_typical_comm(community, perms[[x]], threshold = threshold,out = "similarity"))
+        perm_scores <- sapply(perm_scores, function(x) x$mean[1])
+        p_values <- sum(perm_scores<org_score$mean[1], na.rm = TRUE)/(perm+1)
 
-        out <- data.table::data.table(typology=typology,
+        out <- data.table::data.table(typology = typology,
                                       season = season,
                                       value = org_score,
                                       p_values)
