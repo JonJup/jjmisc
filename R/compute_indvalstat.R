@@ -12,12 +12,26 @@
 #' @examples
 compute_indvalstat <- function(community, grouping){
 
+        #- compute indicator value
         x1 <- indicspecies::multipatt(x = community, cluster = grouping, duleg = TRUE, permutations = 999)
-        x1 <- x1$sign
-        x1$taxon <- rownames(x1)
-        x1 <- x1[which(x1$p.value <= 0.05), ]
-        n_indi <- nrow(x1)
-        mean_stat <- mean(x1$stat)
-        out <- data.table::data.table(n_indi, mean_stat)
-        return(out)
+
+        #- which taxa are indicators?
+        sign <- x1$sign
+        sign$taxon <- rownames(sign)
+        sign <- sign[which(sign$p.value <= 0.05), ]
+
+        #- what are the B values of indicator taxa?
+        B <- x1$B[which(rownames(x1$B) %in% sign$taxon)]
+        sign$B <- B
+
+        #- what are the A values of indicator taxa?
+        A <- x1$A[which(rownames(x1$A) %in% sign$taxon)]
+        sign$A <- A
+
+        #- drop columns
+        sign2 <- sign[, c("A", "B", "stat")]
+        # sign2$n_indi <- nrow(sign)
+        # mean_stat <- mean(x1$stat)
+        # out <- data.table::data.table(n_indi, mean_stat)
+        return(sign2)
 }
