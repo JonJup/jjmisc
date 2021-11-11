@@ -4,7 +4,7 @@
 \alias{indvalstat}
 \title{Compute indicator value statistics}
 \usage{
-indvalstat(community, grouping, perm, typology, season)
+indvalstat(community, grouping, perm, typology, season, least.impaired)
 }
 \arguments{
 \item{community}{data.frame with sites as rows and taxa as columns}

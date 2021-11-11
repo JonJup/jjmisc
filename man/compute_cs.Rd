@@ -7,13 +7,13 @@
 compute_cs(dist, grouping, season, typology)
 }
 \arguments{
-\item{dist}{distance matrix}
+\item{dist}{A distance matrix}
 
 \item{grouping}{character vector with group membership of sites}
 
-\item{season}{character, for which season is the test run?}
+\item{season}{character, for which season is the run? The value is supplied as value for the output table.}
 
-\item{typology}{character, for this typology is this test run?}
+\item{typology}{character, for this typology is this test run? The value is supplied as value for the output table.}
 }
 \value{
 data.table

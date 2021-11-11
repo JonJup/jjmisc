@@ -4,7 +4,7 @@
 \alias{typical_comm}
 \title{Compute statistical significance of typical communities}
 \usage{
-typical_comm(community, grouping, perm, typology, season, threshold = 0.66)
+typical_comm(community, grouping, perm, typology, season, threshold = 0.5)
 }
 \arguments{
 \item{community}{data.frame with sites as rows and taxa as columns}
