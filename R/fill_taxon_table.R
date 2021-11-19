@@ -8,6 +8,7 @@
 #' @param sc character. New subclass name.
 #' @param c character. New class name.
 #' @param p character. New phylum name.
+#' @param k character. New kingdom name.
 #'
 #' @return data.table
 #' @export
