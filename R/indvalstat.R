@@ -35,7 +35,7 @@ indvalstat <- function(community, grouping, perm,typology, season, least.impaire
         if (any(sapply(perm_scores, nrow) == 0)){
                 zero.id <- which(sapply(perm_scores, nrow)==0)
                 n.zero = sum(sapply(perm_scores, nrow)==0)
-                perm_scores[[zero.id]] <- NULL
+                perm_scores[zero.id] <- NULL
                 perm_work = length(perm_scores)
         }
         perm_scores2 <- lapply(1:perm_work, function(x) cbind(perm_scores[[x]], data.frame(id = rep(x, nrow(perm_scores[[x]])))))
