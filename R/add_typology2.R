@@ -1,6 +1,6 @@
 #' Add freshwater typologies to sampling sites
 #'
-#' @param data data.table
+#' @param data data.table to which ecoregions and -types will be added.
 #'
 #' @return data.table
 #' @export
