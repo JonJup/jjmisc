@@ -8,8 +8,6 @@
 #' @examples
 newest_sample <- function(x) {
 
-
-        sping =
         spring <- x[which(x$season == "spring")]
         if (nrow(spring) > 0){
                 spring[, sampling.events := uniqueN(gr_sample_id), by = "site_id"]

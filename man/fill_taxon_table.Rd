@@ -12,7 +12,8 @@ fill_taxon_table(
   or = NULL,
   sc = NULL,
   c = NULL,
-  p = NULL
+  p = NULL,
+  k = NULL
 )
 }
 \arguments{
@@ -29,6 +30,8 @@ fill_taxon_table(
 \item{c}{character. New class name.}
 
 \item{p}{character. New phylum name.}
+
+\item{k}{character. New kingdom name.}
 }
 \value{
 data.table
