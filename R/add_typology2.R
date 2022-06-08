@@ -7,7 +7,7 @@
 #'
 #' @examples
 #'
-add_typologies <- function(data){
+add_typologies2 <- function(data){
 
         sites <-
                 dplyr::distinct_at(data, "site_id", .keep_all = TRUE) |>
